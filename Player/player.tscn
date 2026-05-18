@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://dt1yflctgcwhi"]
+
+[ext_resource type="Script" uid="uid://8t2ogxxd14wa" path="res://Player/player.gd" id="1_l2nui"]
+[ext_resource type="Texture2D" uid="uid://cpyyqleui5pmy" path="res://Player/Sprites/idle_1.png" id="2_hk0a7"]
+[ext_resource type="Texture2D" uid="uid://cpxdersbos33s" path="res://Player/Sprites/idle_2.png" id="3_s5uih"]
+[ext_resource type="Texture2D" uid="uid://b44ivpclopxv4" path="res://Player/Sprites/walk_b1.png" id="4_ce1yv"]
+[ext_resource type="Texture2D" uid="uid://ueouycw7trre" path="res://Player/Sprites/walk_b2.png" id="5_qt58f"]
+[ext_resource type="Texture2D" uid="uid://dkd7f4nikumd2" path="res://Player/Sprites/walk_f1.png" id="6_wfqpy"]
+[ext_resource type="Texture2D" uid="uid://ihmwcb8reqlu" path="res://Player/Sprites/walk_f2.png" id="7_sfu24"]
+[ext_resource type="Texture2D" uid="uid://cpb6tjn3840mu" path="res://Player/Sprites/walk_s1.png" id="8_ywnvw"]
+[ext_resource type="Texture2D" uid="uid://b6b3av4ohvhk4" path="res://Player/Sprites/walk_s2.png" id="9_8tca4"]
+[ext_resource type="AudioStream" uid="uid://c5xlydqp0wc8u" path="res://Player/Sound/bouger.wav" id="10_5htga"]
+[ext_resource type="AudioStream" uid="uid://mwp5mfsrxjo7" path="res://Player/Sound/collision.wav" id="11_p5o4e"]
+[ext_resource type="AudioStream" uid="uid://bj73wepygi8qp" path="res://Player/Sound/victoire.wav" id="12_gu6f8"]
+[ext_resource type="AudioStream" uid="uid://bsewoiqejyj4h" path="res://Player/Sound/defaite.wav" id="13_p5o4e"]
+[ext_resource type="Texture2D" uid="uid://iaig2u176fic" path="res://Player/vie.png" id="14_gu6f8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l2nui"]
+radius = 27.202942
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4abyq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hk0a7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_s5uih")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ce1yv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_qt58f")
+}],
+"loop": true,
+"name": &"walk_b",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_wfqpy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_sfu24")
+}],
+"loop": true,
+"name": &"walk_f",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_ywnvw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_8tca4")
+}],
+"loop": true,
+"name": &"walk_s",
+"speed": 5.0
+}]
+
+[node name="Player" type="Area2D" unique_id=654230390]
+script = ExtResource("1_l2nui")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2126020325]
+shape = SubResource("CircleShape2D_l2nui")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=564781801]
+sprite_frames = SubResource("SpriteFrames_4abyq")
+animation = &"walk_f"
+
+[node name="move" type="AudioStreamPlayer" parent="." unique_id=508840497]
+stream = ExtResource("10_5htga")
+
+[node name="collide" type="AudioStreamPlayer" parent="." unique_id=896510906]
+stream = ExtResource("11_p5o4e")
+
+[node name="victory" type="AudioStreamPlayer" parent="." unique_id=1436953427]
+stream = ExtResource("12_gu6f8")
+
+[node name="fail" type="AudioStreamPlayer" parent="." unique_id=1528018251]
+stream = ExtResource("13_p5o4e")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=798304564]
+
+[node name="Health" type="HBoxContainer" parent="CanvasLayer" unique_id=263581483]
+offset_left = 1081.0
+offset_top = 12.0
+offset_right = 1161.0
+offset_bottom = 36.0
+
+[node name="life1" type="TextureRect" parent="CanvasLayer/Health" unique_id=469516880]
+layout_mode = 2
+texture = ExtResource("14_gu6f8")
+
+[node name="life2" type="TextureRect" parent="CanvasLayer/Health" unique_id=1173745656]
+layout_mode = 2
+texture = ExtResource("14_gu6f8")
+
+[node name="life3" type="TextureRect" parent="CanvasLayer/Health" unique_id=1459713531]
+layout_mode = 2
+texture = ExtResource("14_gu6f8")
+
+[node name="Time" type="Label" parent="CanvasLayer" unique_id=432650042]
+offset_left = 999.0
+offset_top = 16.0
+offset_right = 1039.0
+offset_bottom = 39.0
